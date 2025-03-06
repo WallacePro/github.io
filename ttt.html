@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显卡天梯图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Avenir Next', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-input {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .gpu-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .gpu-table th,
+        .gpu-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .gpu-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .gpu-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .performance-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .performance-bar-inner {
+            height: 100%;
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+
+        /* Style for RTX GPUs */
+        .rtx {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        /* Style for RX GPUs */
+        .rx {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        /* Style for Wallace Benchmark data */
+        .wallace-benchmark {
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        /* Adjust the width of the performance bar column */
+        .gpu-table td:last-child {
+            width: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .gpu-table th,
+            .gpu-table td {
+                padding: 10px;
+            }
+
+            .gpu-table td:last-child {
+                width: 40%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>显卡天梯图</h1>
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="搜索显卡型号">
+        </div>
+        <table class="gpu-table">
+            <thead>
+                <tr>
+                    <th>显卡型号</th>
+                    <th>Wallace Benchmark</th>
+                    <th>性能条</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="rtx">RTX 5090 (D)</td>
+                    <td class="wallace-benchmark">100.00%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 100%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 4090</td>
+                    <td class="wallace-benchmark">73.58%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 73.58%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 4090D</td>
+                    <td class="wallace-benchmark">70.92%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 70.92%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 5080</td>
+                    <td class="wallace-benchmark">66.17%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 66.17%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rx">RX 7900XTX</td>
+                    <td class="wallace-benchmark">62.34%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 62.34%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 4080S</td>
+                    <td class="wallace-benchmark">58.58%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 58.58%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 4080</td>
+                    <td class="wallace-benchmark">57.82%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 57.82%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rx">RX 7900XT</td>
+                    <td class="wallace-benchmark">54.45%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 54.45%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 4070 TI S</td>
+                    <td class="wallace-benchmark">49.16%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 49.16%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 4070TI</td>
+                    <td class="wallace-benchmark">46.49%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 46.49%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rx">RX 7900GRE</td>
+                    <td class="wallace-benchmark">45.73%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 45.73%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rx">RX 6950XT</td>
+                    <td class="wallace-benchmark">44.91%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 44.91%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 3090TI</td>
+                    <td class="wallace-benchmark">44.59%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 44.59%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 4070S</td>
+                    <td class="wallace-benchmark">43.53%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 43.53%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rx">RX 6900XT</td>
+                    <td class="wallace-benchmark">42.35%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 42.35%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rx">RX 7800XT</td>
+                    <td class="wallace-benchmark">41.09%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 41.09%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 3090</td>
+                    <td class="wallace-benchmark">40.89%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 40.89%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 3080TI</td>
+                    <td class="wallace-benchmark">40.19%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 40.19%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rx">RX 6800XT</td>
+                    <td class="wallace-benchmark">39.40%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 39.40%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 3080 12 GB</td>
+                    <td class="wallace-benchmark">38.25%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 38.25%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 4070</td>
+                    <td class="wallace-benchmark">36.58%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 36.58%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rtx">RTX 3080</td>
+                    <td class="wallace-benchmark">36.28%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 36.28%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rx">RX 7700XT</td>
+                    <td class="wallace-benchmark">34.91%</td>
+                    <td>
+                        <div class="performance-bar">
+                            <div class="performance-bar-inner" style="width: 34.91%;"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const gpuRows = document.querySelectorAll('.gpu-table tbody tr');
+
+        searchInput.addEventListener('input', function(e) {
+            const filter = e.target.value.toLowerCase();
+            gpuRows.forEach(row => {
+                const gpuName = row.querySelector('td').textContent.toLowerCase();
+                if (gpuName.includes(filter)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
